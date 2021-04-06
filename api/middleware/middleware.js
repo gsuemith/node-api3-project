@@ -32,7 +32,7 @@ const validateUserId = (Users) => (req, res, next) => {
 
 function validateUser(req, res, next) {
   // DO YOUR MAGIC
-  if (req.body == {}) {
+  if (!(Object.keys(req.body).length)) {
     res.status(400).json({
       message: 'missing user data'
     })
@@ -47,7 +47,7 @@ function validateUser(req, res, next) {
 
 function validatePost(req, res, next) {
   // DO YOUR MAGIC
-  if (req.body == {}) {
+  if (!(Object.keys(req.body).length)) {
     res.status(400).json({
       message: "missing post data"
     })
@@ -56,6 +56,7 @@ function validatePost(req, res, next) {
       message: "missing required text field"
     })
   } else {
+    req.body.user_id = req.user.id
     next()
   }
 }
